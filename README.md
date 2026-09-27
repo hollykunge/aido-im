@@ -3,6 +3,24 @@
 一个带个人 AI 助理「小雀」的工作 IM 原型：消息、TODO、记忆、搜索，以及随时陪在右侧的小雀面板。
 前端 Vue 3，后端 Java 25 + Spring Boot 4 + PostgreSQL，WebSocket 实时推送，桌面和手机宽度都能用。
 
+## 截图
+
+**消息 + 小雀**：左边会话列表和聊天窗口，右边小雀按你正在看的会话回答
+
+![消息与小雀面板](docs/screenshots/desktop-chat.png)
+
+**TODO（深色模式）**：小雀从消息里整理出的待确认事项，今天 / 之后分组，每项都能追溯到原消息
+
+![TODO 页面，深色模式](docs/screenshots/desktop-todo-dark.png)
+
+**手机宽度**：底部导航的会话列表、全屏会话、全屏小雀面板
+
+<p>
+  <img src="docs/screenshots/mobile-list.png" alt="手机：会话列表" width="260" />
+  <img src="docs/screenshots/mobile-chat.png" alt="手机：会话" width="260" />
+  <img src="docs/screenshots/mobile-agent.png" alt="手机：小雀面板" width="260" />
+</p>
+
 ## 功能
 
 - **消息**：私聊 / 群聊、未读、置顶与免打扰、@ 提及（输入 @ 选人，消息里高亮）、表情、附件（选文件 / 拖拽 / 粘贴截图，图片缩略图）
