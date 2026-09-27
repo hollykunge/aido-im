@@ -1,5 +1,7 @@
 # AIDo 5.0 后端服务
 
+简体中文 | [English](README.en.md)
+
 为前端（仓库根目录的 Vue 应用）提供消息、TODO、日程、记忆、搜索和小A助理的接口。
 
 - Java 25 · Spring Boot 4.1 · Spring MVC（虚拟线程）· WebSocket 实时推送
@@ -36,6 +38,7 @@ mvn test
 | `PORT` | `8080` | 服务端口 |
 | `SPRING_PROFILES_ACTIVE` | `demo` | 生产环境设为其他值，不会灌演示数据 |
 | `AIDO_COOKIE_SECURE` | `false` | 生产环境走 HTTPS 时设为 `true`，会话 Cookie 加上 `Secure` |
+| `AIDO_FILES_DIR` | `./data/files` | 附件存放目录 |
 | `aido.login-throttle.*` | 15 分钟内账号 5 次 / IP 20 次 | 登录失败限流 |
 | `AIDO_CORS_ORIGINS` | demo 下为 `http://localhost:5173` | 允许跨域的前端地址，逗号分隔 |
 | `AIDO_AGENT_ENABLED` | `true` | 设为 `false` 模拟小A不可用，AI 接口返回 503 |
@@ -73,6 +76,7 @@ src/main/java/com/aido/server/
   user/       用户、通讯录、个人偏好（主题、小A形象）
   workspace/  顶部 tab 角标
   chat/       会话、消息、已读、私聊、小A摘要与建议回复
+  files/      附件上传、下载与存储
   todo/       TODO、从消息生成、批量确认/忽略、重新整理
   calendar/   日程
   memory/     记忆：画像标签、具体记忆、学习来源
@@ -132,6 +136,8 @@ src/main/resources/db/
 | POST | `/conversations/dm` | `{userId}` 打开或新建私聊 |
 | GET | `/conversations/{id}/messages?before=&limit=50` | 消息按时间正序；每条带 `mentionsMe` 和关联的 `todo` |
 | POST | `/conversations/{id}/messages` | `{text}` 发送；对方未读 +1，解析 `@名字` |
+| POST | `/conversations/{id}/files` | `multipart/form-data`，字段 `file`，单个不超过 50 MB；上传并作为一条附件消息发出，返回 201 |
+| GET | `/files/{messageId}` | 下载附件，仅会话成员可见；安全的图片格式在页面内显示（缩略图），其余及加 `?download` 时作为下载 |
 | POST | `/conversations/{id}/read` | 标记已读 |
 | GET | `/conversations/{id}/summary` | 小A摘要，没有时 204 |
 | GET | `/conversations/{id}/suggested-replies` | 建议回复 |
@@ -214,11 +220,10 @@ HTTP 请求带 `X-Client-Id`（标签页 id），推送时跳过发起这次改�
 
 ## 小A的实现
 
-`agent/AgentBrain` 是接口，现在的 `RuleBasedAgentBrain` 按关键词识别意图（总结会话、今天的会、起草回复、TODO 排序、整理待办、记忆），行为与前端原来的 `stores/agent.js` 一致，数据改为读库。接入大模型时实现这个接口替换即可，接口和前端都不用改。
+`agent/AgentBrain` 是接口，现在的 `RuleBasedAgentBrain` 按关键词识别意图（总结会话、今天的会、起草回复、TODO 排序、整理待办、记忆），数据从库里读。接入大模型时实现这个接口替换即可，接口和前端都不用改。
 
 ## 还没做的
 
 - 注册、找回密码
-- 多实例部署时的跨实例推送广播（见上文「横向扩容」）
-- 文件上传与下载（现在只存附件名和大小）
+- 多实例部署时的跨实例推送广播（见上文「横向扩容」）；附件换成对象存储（现在存本地目录 `aido.files.dir`，默认 `data/files`）
 - 小A接入大模型、定时任务（早间未读整理、周报草拟）

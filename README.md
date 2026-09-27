@@ -1,5 +1,7 @@
 # AIDo 5.0
 
+简体中文 | [English](README.en.md)
+
 一个带个人 AI 助理「小A」的工作 IM 原型：消息、TODO、记忆、搜索，以及随时陪在右侧的小A面板。
 前端 Vue 3，后端 Java 25 + Spring Boot 4 + PostgreSQL，WebSocket 实时推送，桌面和手机宽度都能用。
 
