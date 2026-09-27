@@ -1,0 +1,9 @@
+# 演示环境：灌入演示数据和演示账号（见 db/demo），允许本地前端跨域
+spring:
+  flyway:
+    locations: classpath:db/migration,classpath:db/demo
+    # 演示数据的版本号（V100+）比后来新增的表结构迁移大；允许乱序，已灌过演示数据的本地库也能升级
+    out-of-order: true
+
+aido:
+  cors-origins: ${AIDO_CORS_ORIGINS:http://localhost:5173}

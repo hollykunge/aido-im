@@ -1,0 +1,347 @@
+:root {
+  /* 品牌色：AIDo 青 */
+  --accent: #12b5a0;
+  --accent-strong: #0c9a88;
+  --accent-soft: rgba(18, 181, 160, 0.12);
+  --accent-softer: rgba(18, 181, 160, 0.07);
+  --blue: #2f7cf6;
+  --blue-soft: rgba(47, 124, 246, 0.1);
+  --danger: #ef4444;
+  --danger-soft: rgba(239, 68, 68, 0.1);
+  --warn: #f59e0b;
+  --warn-soft: rgba(245, 158, 11, 0.12);
+
+  --text-1: #1b1c21;
+  --text-2: #565a66;
+  --text-3: #9398a4;
+  --line: rgba(20, 24, 40, 0.07);
+  --line-strong: rgba(20, 24, 40, 0.12);
+
+  --wallpaper: radial-gradient(1200px 700px at 12% -10%, #c9b8e8 0%, transparent 60%),
+    radial-gradient(900px 700px at 100% 110%, #f6b27a 0%, transparent 60%),
+    linear-gradient(135deg, #8d7fb8 0%, #c98fa4 50%, #e6a071 100%);
+  /* 窗口与主功能区同色，不形成差异 */
+  --window: #ffffff;
+  --agent-pane: #f1f1f4;
+  /* 主功能区：小雀收起时纯白 / 纯黑；展开时叠加小雀配色的淡渐变（见 AppShell） */
+  --workspace: #ffffff;
+  --card: #ffffff;
+  --card-glass: rgba(255, 255, 255, 0.66);
+  --card-sub: rgba(245, 246, 250, 0.85);
+  --hover: rgba(20, 24, 40, 0.045);
+  --hover-strong: #eef0f5;
+  --card-hover: #fafafa;
+  /* 列表项状态（会话列表、@ 选人等）：悬停用中性浅灰，选中用品牌色浅底，二者一眼能分开；
+     都是半透明叠加，放在白底、毛玻璃、小雀配色渐变上都看得出来 */
+  --list-hover: rgba(20, 24, 40, 0.05);
+  --list-active: rgba(18, 181, 160, 0.13);
+  --list-active-hover: rgba(18, 181, 160, 0.18);
+
+  /* 语义化表面 */
+  --edge-hi: rgba(255, 255, 255, 0.9); /* 玻璃面板的内高光 */
+  --glass-1: rgba(255, 255, 255, 0.55);
+  --glass-2: rgba(255, 255, 255, 0.82);
+  --panel: rgba(255, 255, 255, 0.8);
+  --hero: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.55));
+  --popover: #ffffff;
+  --bubble: #f1f2f5;
+  --bubble-mine: #d8f4ef;
+  --bubble-mention: #fff7e0;
+  --fill-muted: #e6e8ed; /* 未激活图标底、禁用按钮 */
+  --fill-strong: #cfd2d9; /* 开关关闭、次要徽标 */
+  --ink: #1b1c21; /* 反色块：选中的筛选项等 */
+  --on-ink: #ffffff;
+  --danger-text: #dc2626;
+  --warn-text: #b45309;
+  --pink: #db2777;
+  --pink-soft: #fdeef6;
+
+  /* 分段 tab 栏 */
+  --seg-track: rgba(118, 124, 142, 0.14);
+  --seg-border: rgba(20, 24, 40, 0.05);
+  --seg-shadow: 0 1px 2px rgba(20, 24, 40, 0.06), 0 4px 12px rgba(20, 24, 40, 0.06);
+  --seg-active: #ffffff;
+  --seg-active-shadow: 0 1px 3px rgba(20, 24, 40, 0.16), 0 0 0 0.5px rgba(20, 24, 40, 0.08);
+
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 26px;
+  --shadow-sm: 0 1px 2px rgba(20, 24, 40, 0.05);
+  --shadow-md: 0 4px 16px rgba(20, 24, 40, 0.06), 0 1px 2px rgba(20, 24, 40, 0.04);
+  --shadow-window: 0 12px 40px rgba(30, 20, 50, 0.28), 0 2px 8px rgba(30, 20, 50, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.14);
+  --shadow-pop: 0 18px 50px rgba(30, 20, 60, 0.2);
+  --ease-spring: cubic-bezier(0.32, 1.25, 0.5, 1);
+
+  color-scheme: light;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'Helvetica Neue', sans-serif;
+  color: var(--text-1);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* —— 暗色主题 —— */
+:root[data-theme='dark'] {
+  --accent: #19c2ac;
+  --accent-strong: #4fd9c5;
+  --accent-soft: rgba(25, 194, 172, 0.18);
+  --accent-softer: rgba(25, 194, 172, 0.1);
+  --blue: #5b95ff;
+  --blue-soft: rgba(91, 149, 255, 0.16);
+  --danger: #f05252;
+  --danger-soft: rgba(248, 113, 113, 0.16);
+  --warn-soft: rgba(251, 191, 36, 0.16);
+
+  --text-1: #eceef3;
+  --text-2: #a9afbc;
+  --text-3: #707786;
+  --line: rgba(255, 255, 255, 0.07);
+  --line-strong: rgba(255, 255, 255, 0.13);
+
+  --wallpaper: radial-gradient(1200px 700px at 12% -10%, #3b2f5c 0%, transparent 60%),
+    radial-gradient(900px 700px at 100% 110%, #5a3423 0%, transparent 60%),
+    linear-gradient(135deg, #1d1a2c 0%, #2a1f2b 50%, #2e2119 100%);
+  --window: #000000;
+  --workspace: #000000;
+  --card: #252732;
+  --card-glass: rgba(37, 39, 50, 0.72);
+  --card-sub: rgba(255, 255, 255, 0.045);
+  --hover: rgba(255, 255, 255, 0.06);
+  --hover-strong: rgba(255, 255, 255, 0.09);
+  --card-hover: #2c2f3b;
+  --list-hover: rgba(255, 255, 255, 0.07);
+  --list-active: rgba(25, 194, 172, 0.2);
+  --list-active-hover: rgba(25, 194, 172, 0.26);
+
+  --edge-hi: rgba(255, 255, 255, 0.06);
+  --glass-1: rgba(255, 255, 255, 0.05);
+  --glass-2: rgba(255, 255, 255, 0.09);
+  --panel: rgba(34, 36, 46, 0.82);
+  --hero: linear-gradient(135deg, rgba(46, 48, 61, 0.92), rgba(34, 36, 46, 0.72));
+  --popover: #26282f;
+  --bubble: #2c2f3a;
+  --bubble-mine: #1b4842;
+  --bubble-mention: #3a3121;
+  --fill-muted: #33363f;
+  --fill-strong: #474b57;
+  --ink: #eceef3;
+  --on-ink: #17181e;
+  --danger-text: #f87171;
+  --warn-text: #fbbf24;
+  --pink: #f472b6;
+  --pink-soft: rgba(244, 114, 182, 0.16);
+
+  --seg-track: rgba(255, 255, 255, 0.06);
+  --seg-border: rgba(255, 255, 255, 0.07);
+  --seg-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.25);
+  --seg-active: #3b3e4b;
+  --seg-active-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 0.5px rgba(255, 255, 255, 0.14);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.32), 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-window: 0 12px 40px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  --shadow-pop: 0 18px 50px rgba(0, 0, 0, 0.5);
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: #b89ab0;
+  background: var(--wallpaper);
+  overflow: hidden;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+/* 手机上输入框字号不能小于 16px，否则 iOS Safari 一聚焦就把整页放大 */
+@media (max-width: 760px) {
+  input:not([type='checkbox']):not([type='radio']):not([type='color']):not([type='range']),
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* —— 通用小组件 —— */
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--card);
+  box-shadow: var(--shadow-sm), 0 0 0 0.5px var(--line-strong);
+  color: var(--text-2);
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+.icon-btn:hover {
+  color: var(--text-1);
+  background: var(--card-hover);
+}
+.icon-btn:active {
+  transform: scale(0.94);
+}
+.icon-btn.ghost {
+  background: transparent;
+  box-shadow: none;
+}
+.icon-btn.ghost:hover {
+  background: var(--hover);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13px;
+  transition: filter 0.15s, transform 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(18, 181, 160, 0.3);
+}
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+.btn-blue {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(47, 124, 246, 0.28);
+}
+.btn-soft {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+.btn-soft:hover {
+  background: rgba(18, 181, 160, 0.18);
+}
+.btn-plain {
+  background: var(--card);
+  color: var(--text-2);
+  box-shadow: 0 0 0 0.5px var(--line-strong);
+}
+.btn-plain:hover {
+  color: var(--text-1);
+}
+.btn-lg {
+  height: 44px;
+  padding: 0 22px;
+  font-size: 15px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  white-space: nowrap;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.muted {
+  color: var(--text-3);
+}
+
+/* 开关 */
+.switch {
+  appearance: none;
+  position: relative;
+  width: 38px;
+  height: 22px;
+  margin: 0;
+  border-radius: 11px;
+  background: var(--fill-strong);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.25s var(--ease-spring);
+}
+.switch:checked {
+  background: var(--accent);
+}
+.switch:checked::after {
+  transform: translateX(16px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s, transform 0.2s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(6px);
+}

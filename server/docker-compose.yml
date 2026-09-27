@@ -1,0 +1,23 @@
+# 本地开发数据库：docker compose up -d
+# 映射到本机 55432，避免和已有的 PostgreSQL（5432）冲突；需要时用 DB_PORT 覆盖
+name: aido
+
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: aido
+      POSTGRES_USER: aido
+      POSTGRES_PASSWORD: aido
+      TZ: Asia/Shanghai
+    ports:
+      - "${DB_PORT:-55432}:5432"
+    volumes:
+      - aido-pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aido -d aido"]
+      interval: 5s
+      retries: 10
+
+volumes:
+  aido-pg:

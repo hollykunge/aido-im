@@ -1,0 +1,72 @@
+spring:
+  application:
+    name: aido-server
+  profiles:
+    # 默认带演示数据启动；生产环境用 SPRING_PROFILES_ACTIVE=prod 等覆盖
+    default: demo
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:55432/aido}
+    username: ${DB_USER:aido}
+    password: ${DB_PASSWORD:aido}
+  flyway:
+    locations: classpath:db/migration
+  # 登录会话存在 PostgreSQL：服务重启不掉登录，多实例共享；表由 Flyway 建（V2__auth.sql）
+  session:
+    jdbc:
+      initialize-schema: never
+      cleanup-cron: "0 */10 * * * *"
+  jackson:
+    default-property-inclusion: non_null
+  mvc:
+    problemdetails:
+      enabled: true
+  # 聊天附件大小上限（改这里时一并改 ApiExceptionHandler 里的提示和前端 MAX_FILE_BYTES）
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 51MB
+  # 请求和 WebSocket 发送都跑在虚拟线程上，等待 IO 时不占平台线程
+  threads:
+    virtual:
+      enabled: true
+
+server:
+  port: ${PORT:8080}
+  tomcat:
+    # 超过上传上限的请求也把请求体读完再回 413，客户端能拿到正常的错误响应而不是连接被重置
+    max-swallow-size: 60MB
+  servlet:
+    session:
+      timeout: 14d            # 两周不活动才需要重新登录
+      cookie:
+        name: AIDO_SESSION
+        http-only: true       # 脚本读不到，XSS 偷不走
+        same-site: lax        # 跨站请求不带 cookie
+        secure: ${AIDO_COOKIE_SECURE:false}  # 生产环境走 HTTPS 时设为 true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+aido:
+  zone: Asia/Shanghai
+  files:
+    dir: ${AIDO_FILES_DIR:./data/files}   # 附件存放目录
+  cors-origins: ${AIDO_CORS_ORIGINS:}
+  # 登录失败限流：同一账号 / 同一 IP 在时间窗内失败太多次就暂时拒绝
+  login-throttle:
+    window: 15m
+    max-failures-per-account: 5
+    max-failures-per-ip: 20
+  # 实时推送（WebSocket）
+  realtime:
+    heartbeat: 25s          # 服务端发 ping 的间隔
+    idle-timeout: 60s       # 这么久没收到客户端任何消息就断开
+    send-queue-limit: 256   # 每条连接最多积压的待发消息，超过即判定为慢客户端并断开
+    max-connections-per-user: 8
+  agent:
+    name: 小雀
+    tagline: 你的个人工作助理
+    enabled: ${AIDO_AGENT_ENABLED:true}
