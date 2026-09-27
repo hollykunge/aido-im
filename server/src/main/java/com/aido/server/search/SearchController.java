@@ -59,7 +59,7 @@ public class SearchController {
 
   /**
    * @param scope            all 时每类最多返回 perSection 条，其余只返回该类
-   * @param includeSuggested 小雀不可用时传 false，不返回待确认的建议
+   * @param includeSuggested 小A不可用时传 false，不返回待确认的建议
    */
   @GetMapping
   public Result search(

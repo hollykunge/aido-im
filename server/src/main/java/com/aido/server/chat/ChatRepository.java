@@ -48,7 +48,7 @@ public class ChatRepository {
       ) lm ON true
       """;
 
-  /** filter：all 全部 / unread 未读 / flag 小雀精选。置顶在前，其余按最后消息时间倒序。 */
+  /** filter：all 全部 / unread 未读 / flag 小A精选。置顶在前，其余按最后消息时间倒序。 */
   public List<ConversationDto> listConversations(String me, String filter) {
     return jdbc.sql(CONVERSATION_SELECT + """
         WHERE (:filter = 'all'
@@ -234,7 +234,7 @@ public class ChatRepository {
         .update();
   }
 
-  /** 新消息：更新会话时间；发送人视为已读，并清掉小雀给他的「待回复」类标记；其他成员未读 +1。 */
+  /** 新消息：更新会话时间；发送人视为已读，并清掉小A给他的「待回复」类标记；其他成员未读 +1。 */
   public void afterMessage(String conversationId, String senderId, OffsetDateTime sentAt) {
     jdbc.sql("UPDATE conversation SET last_message_at = greatest(last_message_at, :at) WHERE id = :conv")
         .param("at", sentAt)

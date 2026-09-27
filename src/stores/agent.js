@@ -16,7 +16,7 @@ export const useAgent = defineStore('agent', () => {
   const feed = ref([])
   const busy = ref(false)
 
-  // AI 可用性：后端关闭小雀，或在设置里模拟不可用时，界面上的 AI 元素直接隐藏，基础功能照常使用
+  // AI 可用性：后端关闭小A，或在设置里模拟不可用时，界面上的 AI 元素直接隐藏，基础功能照常使用
   const simulatedDown = ref(false)
   const aiOk = computed(() => profile.value.available && !simulatedDown.value)
   const checking = ref(false)
@@ -33,7 +33,7 @@ export const useAgent = defineStore('agent', () => {
     checking.value = false
   }
 
-  // 小雀的自动化能力开关
+  // 小A的自动化能力开关
   const capabilities = ref([])
   async function toggleCapability(c, on) {
     const ws = useWorkspace()
@@ -59,14 +59,14 @@ export const useAgent = defineStore('agent', () => {
     look,
     (v) => {
       try {
-        localStorage.setItem('yunque.agentLook', JSON.stringify(v))
+        localStorage.setItem('aido.agentLook', JSON.stringify(v))
       } catch {}
     },
     { deep: true },
   )
   function readLook() {
     try {
-      const v = JSON.parse(localStorage.getItem('yunque.agentLook'))
+      const v = JSON.parse(localStorage.getItem('aido.agentLook'))
       if (v && typeof v === 'object') return { ...LOOK_DEFAULT, ...v }
     } catch {}
     return { ...LOOK_DEFAULT }
@@ -122,7 +122,7 @@ export const useAgent = defineStore('agent', () => {
     )
   }
 
-  // —— 启动：小雀资料、对话流、能力开关、个人偏好 ——
+  // —— 启动：小A资料、对话流、能力开关、个人偏好 ——
   async function init() {
     const [p, caps, prefs] = await Promise.all([api.agent(), api.capabilities(), api.preferences()])
     profile.value = p

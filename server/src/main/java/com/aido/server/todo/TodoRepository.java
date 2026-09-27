@@ -171,7 +171,7 @@ public class TodoRepository {
     return id.flatMap(i -> find(me, i));
   }
 
-  // —— 小雀识别出的候选事项 ——
+  // —— 小A识别出的候选事项 ——
 
   /** 把最早的一条候选转成「待确认」TODO，返回新 TODO 的 id；没有候选时为空。 */
   public Optional<Long> promoteNextCandidate(String me) {

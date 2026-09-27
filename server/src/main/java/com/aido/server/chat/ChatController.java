@@ -32,7 +32,7 @@ public class ChatController {
     this.repo = repo;
   }
 
-  /** 消息坞：filter = all | unread | flag（小雀精选）。 */
+  /** 消息坞：filter = all | unread | flag（小A精选）。 */
   @GetMapping
   public List<ConversationDto> list(@CurrentUser String me, @RequestParam(defaultValue = "all") String filter) {
     return chat.list(me, filter);
@@ -83,7 +83,7 @@ public class ChatController {
     return chat.members(me, id);
   }
 
-  /** 小雀的未读摘要；没有摘要时返回 204。 */
+  /** 小A的未读摘要；没有摘要时返回 204。 */
   @GetMapping("/{id}/summary")
   public ResponseEntity<SummaryDto> summary(@CurrentUser String me, @PathVariable String id) {
     chat.requireMember(me, id);

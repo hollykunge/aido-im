@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-/** 记忆页：小雀记住的关于你的画像、具体记忆和学习来源。仅本人可见。 */
+/** 记忆页：小A记住的关于你的画像、具体记忆和学习来源。仅本人可见。 */
 @RestController
 @RequestMapping("/api/memory")
 public class MemoryController {

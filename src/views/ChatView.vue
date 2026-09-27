@@ -21,7 +21,7 @@ const router = useRouter()
 const ws = useWorkspace()
 const agentStore = useAgent()
 
-// 「小雀精选」是 AI 筛选，AI 不可用时不提供
+// 「小A精选」是 AI 筛选，AI 不可用时不提供
 const filters = computed(() => [
   { key: 'all', label: '全部' },
   { key: 'unread', label: '未读' },
@@ -435,7 +435,7 @@ function nameOf(m) {
           <span class="muted">{{ conv.type === 'group' ? `${conv.members} 人` : ws.users[conv.userId]?.role }}</span>
         </div>
         <div class="win-actions">
-          <!-- 手机宽度下顶部栏隐藏，小雀从这里打开 -->
+          <!-- 手机宽度下顶部栏隐藏，小A从这里打开 -->
           <button
             v-if="ws.isCompact && agentStore.aiOk"
             class="icon-btn ghost orb-btn"
@@ -452,7 +452,7 @@ function nameOf(m) {
         </div>
       </header>
 
-      <!-- 小雀未读摘要：一行提示，点开看要点 -->
+      <!-- 小A未读摘要：一行提示，点开看要点 -->
       <div v-if="agentStore.aiOk && summary && summaryOpen" class="ai-tip">
         <button class="tip-row" @click="summaryExpanded = !summaryExpanded">
           <AgentOrb :size="20" />

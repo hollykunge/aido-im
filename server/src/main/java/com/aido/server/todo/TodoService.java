@@ -87,7 +87,7 @@ public class TodoService {
     return repo.findAll(me, ids);
   }
 
-  /** 「重新整理」：把小雀新识别出的下一件事放进待确认；没有新事项时为空。 */
+  /** 「重新整理」：把小A新识别出的下一件事放进待确认；没有新事项时为空。 */
   @Transactional
   public Optional<TodoDto> rescan(String me) {
     return repo.promoteNextCandidate(me).map(id -> changed(me, id));

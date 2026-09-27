@@ -19,22 +19,22 @@ public class RealtimeEvents {
   /** 某人把会话标记为已读（同步到他的其他标签页）。 */
   public record ConversationRead(String userId, String conversationId, String originClient) {}
 
-  /** 某人的一批 TODO 变了（新建、改状态、小雀整理出新的待确认…）。 */
+  /** 某人的一批 TODO 变了（新建、改状态、小A整理出新的待确认…）。 */
   public record TodosChanged(String userId, List<Long> todoIds, String originClient) {}
 
   /** 某人的记忆（画像、具体记忆、学习来源）变了。 */
   public record MemoryChanged(String userId, String originClient) {}
 
-  /** 某人的个人偏好（主题、小雀形象、是否从日常工作中学习）变了。 */
+  /** 某人的个人偏好（主题、小A形象、是否从日常工作中学习）变了。 */
   public record PreferencesChanged(String userId, String originClient) {}
 
-  /** 某人的小雀能力开关变了。 */
+  /** 某人的小A能力开关变了。 */
   public record CapabilitiesChanged(String userId, String originClient) {}
 
   /** 某人改了姓名或头像颜色（所有人都看得到）。 */
   public record UserUpdated(String userId, String originClient) {}
 
-  /** 某人的小雀对话流新增或更新了卡片。 */
+  /** 某人的小A对话流新增或更新了卡片。 */
   public record AgentItemsChanged(String userId, List<ObjectNode> items, String originClient) {}
 
   private final ApplicationEventPublisher publisher;

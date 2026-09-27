@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tools.jackson.databind.node.ObjectNode;
 
-/** 小雀（个人 Agent）面板。 */
+/** 小A（个人 Agent）面板。 */
 @RestController
 @RequestMapping("/api/agent")
 public class AgentController {
@@ -37,7 +37,7 @@ public class AgentController {
     this.events = events;
   }
 
-  /** @param available false 时前端隐藏 AI 元素（小雀精选、待确认建议、建议回复等） */
+  /** @param available false 时前端隐藏 AI 元素（小A精选、待确认建议、建议回复等） */
   public record Profile(String name, String tagline, boolean available, List<String> quickPrompts) {}
 
   @GetMapping
@@ -54,7 +54,7 @@ public class AgentController {
 
   public record Ask(@NotBlank @Size(max = 2000) String text, AgentBrain.Context context) {}
 
-  /** 和小雀说一句话，返回思考步骤和新增的卡片。 */
+  /** 和小A说一句话，返回思考步骤和新增的卡片。 */
   @PostMapping("/messages")
   public AgentService.Exchange send(@CurrentUser String me, @RequestBody @Valid Ask body) {
     return agent.send(me, body.text(), body.context());

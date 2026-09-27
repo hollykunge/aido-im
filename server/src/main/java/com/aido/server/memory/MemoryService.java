@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/** 记忆：小雀记住的关于你的画像、具体记忆和学习来源。仅本人可见；每次改动都把整页快照推给本人的其他标签页。 */
+/** 记忆：小A记住的关于你的画像、具体记忆和学习来源。仅本人可见；每次改动都把整页快照推给本人的其他标签页。 */
 @Service
 public class MemoryService {
 
@@ -34,7 +34,7 @@ public class MemoryService {
 
   public record Source(String key, String label, String description, boolean enabled) {}
 
-  /** @param learning 是否允许小雀从日常工作中学习 */
+  /** @param learning 是否允许小A从日常工作中学习 */
   public record Memory(boolean learning, List<ProfileGroup> profile, List<Item> items, List<Source> sources) {}
 
   public Memory snapshot(String me) {

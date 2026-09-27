@@ -1,38 +1,38 @@
 # AIDo 5.0
 
-一个带个人 AI 助理「小雀」的工作 IM 原型：消息、TODO、记忆、搜索，以及随时陪在右侧的小雀面板。
+一个带个人 AI 助理「小A」的工作 IM 原型：消息、TODO、记忆、搜索，以及随时陪在右侧的小A面板。
 前端 Vue 3，后端 Java 25 + Spring Boot 4 + PostgreSQL，WebSocket 实时推送，桌面和手机宽度都能用。
 
 ## 截图
 
-**消息 + 小雀**：左边会话列表和聊天窗口，右边小雀按你正在看的会话回答
+**消息 + 小A**：左边会话列表和聊天窗口，右边小A按你正在看的会话回答
 
-![消息与小雀面板](docs/screenshots/desktop-chat.png)
+![消息与小A面板](docs/screenshots/desktop-chat.png)
 
-**TODO（深色模式）**：小雀从消息里整理出的待确认事项，今天 / 之后分组，每项都能追溯到原消息
+**TODO（深色模式）**：小A从消息里整理出的待确认事项，今天 / 之后分组，每项都能追溯到原消息
 
 ![TODO 页面，深色模式](docs/screenshots/desktop-todo-dark.png)
 
-**手机宽度**：底部导航的会话列表、全屏会话、全屏小雀面板
+**手机宽度**：底部导航的会话列表、全屏会话、全屏小A面板
 
 <p>
   <img src="docs/screenshots/mobile-list.png" alt="手机：会话列表" width="260" />
   <img src="docs/screenshots/mobile-chat.png" alt="手机：会话" width="260" />
-  <img src="docs/screenshots/mobile-agent.png" alt="手机：小雀面板" width="260" />
+  <img src="docs/screenshots/mobile-agent.png" alt="手机：小A面板" width="260" />
 </p>
 
 ## 功能
 
 - **消息**：私聊 / 群聊、未读、置顶与免打扰、@ 提及（输入 @ 选人，消息里高亮）、表情、附件（选文件 / 拖拽 / 粘贴截图，图片缩略图）
-- **TODO**：小雀从消息里整理待办（可追溯到原消息），待确认 / 今天 / 之后 / 已完成，一键转为 TODO
-- **小雀**：按主窗口正在看的内容回答，总结会话、起草回复（可直接发送并勾掉对应 TODO）、排 TODO、查日程；形象配色可换
-- **记忆**：小雀记住的画像、具体记忆和学习来源，可修改
+- **TODO**：小A从消息里整理待办（可追溯到原消息），待确认 / 今天 / 之后 / 已完成，一键转为 TODO
+- **小A**：按主窗口正在看的内容回答，总结会话、起草回复（可直接发送并勾掉对应 TODO）、排 TODO、查日程；形象配色可换
+- **记忆**：小A记住的画像、具体记忆和学习来源，可修改
 - **搜索**：联系人、群组、消息、文件、TODO 一处搜
 - **实时**：新消息、已读、TODO、记忆、设置、资料变更通过 WebSocket 推送，多标签页同步，断线自动重连并补拉
 - **账号**：登录 / 退出、修改密码、修改姓名和头像颜色
-- **手机宽度**：底部导航、会话全屏、小雀全屏面板、设置底部抽屉
+- **手机宽度**：底部导航、会话全屏、小A全屏面板、设置底部抽屉
 
-> 小雀目前是按关键词匹配的规则实现（`server/.../agent/RuleBasedAgentBrain`），接入大模型时实现 `AgentBrain` 接口替换即可。
+> 小A目前是按关键词匹配的规则实现（`server/.../agent/RuleBasedAgentBrain`），接入大模型时实现 `AgentBrain` 接口替换即可。
 
 ## 技术栈
 
@@ -71,10 +71,10 @@ cd server && mvn test
 ```
 src/                前端
   api/              接口封装、实时推送连接
-  stores/           Pinia：工作区、小雀、记忆、实时事件
+  stores/           Pinia：工作区、小A、记忆、实时事件
   views/            消息、TODO、搜索、记忆、登录
-  components/       小雀面板、聊天（表情 / @ / 消息文本）、TODO、通用组件
-  layouts/          主框架（顶部 tab 栏、底部导航、小雀面板容器）
+  components/       小A面板、聊天（表情 / @ / 消息文本）、TODO、通用组件
+  layouts/          主框架（顶部 tab 栏、底部导航、小A面板容器）
 server/             后端，详见 server/README.md（接口、表结构、推送协议、鉴权）
 ```
 

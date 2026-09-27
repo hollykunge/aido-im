@@ -17,7 +17,7 @@ public class WorkspaceController {
   /**
    * @param unreadTotal   未免打扰会话的未读合计（「消息」tab 角标）
    * @param openTodoCount 待办数（「TODO」tab 角标）
-   * @param suggestedCount 小雀建议、待你确认的 TODO 数
+   * @param suggestedCount 小A建议、待你确认的 TODO 数
    */
   public record Counters(int unreadTotal, int openTodoCount, int suggestedCount) {}
 

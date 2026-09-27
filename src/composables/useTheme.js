@@ -2,7 +2,7 @@ import { computed, ref, watchEffect } from 'vue'
 import { useMedia } from './useMedia'
 
 // 主题：light 浅色 | dark 深色 | system 跟随系统。选择存在本地
-const KEY = 'yunque.theme'
+const KEY = 'aido.theme'
 const mode = ref(read())
 let systemDark
 let started = false

@@ -88,7 +88,7 @@ UPDATE conversation c SET last_message_at = m.last FROM (
   SELECT conversation_id, max(sent_at) AS last FROM message GROUP BY conversation_id
 ) m WHERE m.conversation_id = c.id;
 
--- —— 小雀的摘要与回复建议 ——
+-- —— 小A的摘要与回复建议 ——
 INSERT INTO conversation_summary (conversation_id, owner_id, message_count, points) VALUES
   ('c1', 'me', 32, ARRAY[
     '周远 @你：Agent 外壳 demo 周五能否给到，需要你答复',
@@ -110,7 +110,7 @@ INSERT INTO reply_suggestion (conversation_id, owner_id, kind, body, position) V
   (NULL, 'me', 'draft', '收到，我看一下，晚点回复你。', 0);
 
 -- —— TODO ——
--- due_label 只放小雀给的模糊说法（「14:00 前」「待定」）；「今天」「明天」「9月27日」由后端按日期实时换算
+-- due_label 只放小A给的模糊说法（「14:00 前」「待定」）；「今天」「明天」「9月27日」由后端按日期实时换算
 INSERT INTO todo (id, owner_id, title, status, kind, priority, planned_date, due_label, due_at, note, source_message_id, created_by, completed_at) VALUES
   (1,  'me', '答复周远：Agent demo 周五能否给到', 'open', 'reply', 'P0', current_date, NULL, NULL,
        '周远 @你 要一个明确答复，demo 周五要给老板看', 105, 'agent', NULL),
@@ -167,12 +167,12 @@ INSERT INTO memory_item (owner_id, body, source, created_at, updated_at) VALUES
 
 INSERT INTO memory_source (owner_id, key, label, description, enabled, position) VALUES
   ('me', 'chat',     '消息',   '私聊与群聊',         true,  0),
-  ('me', 'todo',     'TODO',   '小雀整理出的待办',   true,  1),
+  ('me', 'todo',     'TODO',   '小A整理出的待办',   true,  1),
   ('me', 'calendar', '日历',   '会议与日程',         true,  2),
   ('me', 'docs',     '云文档', '你创建和编辑的文档', true,  3),
   ('me', 'mail',     '邮箱',   '工作邮箱',           false, 4);
 
--- —— 小雀 ——
+-- —— 小A ——
 INSERT INTO agent_capability (owner_id, key, title, description, enabled, position) VALUES
   ('me', 'unread_digest',   '未读消息整理', '每天 8:30 汇总未读，只把需要你的挑出来',       true,  0),
   ('me', 'todo_extraction', '待办自动提取', '群聊里被 @ 或被分派的事项，自动建成 TODO',     true,  1),

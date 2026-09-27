@@ -67,6 +67,6 @@ aido:
     send-queue-limit: 256   # 每条连接最多积压的待发消息，超过即判定为慢客户端并断开
     max-connections-per-user: 8
   agent:
-    name: 小雀
+    name: 小A
     tagline: 你的个人工作助理
     enabled: ${AIDO_AGENT_ENABLED:true}

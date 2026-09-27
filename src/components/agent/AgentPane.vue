@@ -42,7 +42,7 @@ const feedStart = computed(() => {
   return first && stamp(first.createdAt)
 })
 
-// 手机标题栏里的状态文字，跟着小雀的情绪变
+// 手机标题栏里的状态文字，跟着小A的情绪变
 const STATUS = { thinking: '思考中…', listening: '正在听…', happy: '好的', offline: '暂时不可用' }
 const statusText = computed(() => STATUS[store.mood] ?? (store.profile.tagline || '在线'))
 // 手机上没有右键菜单，记忆页从这里进：收起面板再跳转
@@ -81,7 +81,7 @@ function send(text) {
 <template>
   <section class="agent-pane" :class="{ compact: ws.isCompact }" :style="{ '--foot-h': footH + 'px' }">
     <header class="head">
-      <!-- 桌面宽度：小雀头像悬浮在窗口右上角（见 AppShell），这里留空。
+      <!-- 桌面宽度：小A头像悬浮在窗口右上角（见 AppShell），这里留空。
            手机宽度：面板占满全屏，给一个完整的标题栏——返回、身份和状态、记忆、设置 -->
       <template v-if="ws.isCompact">
         <button class="icon-btn ghost back" title="返回" aria-label="返回" @click="ws.agentCollapsed = true">

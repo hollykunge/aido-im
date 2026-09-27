@@ -5,7 +5,7 @@ import { EMOJI_GROUPS } from './emoji'
 const emit = defineEmits(['pick'])
 
 // 最近使用的表情记在本机浏览器里（只是方便，丢了也不影响）
-const RECENT_KEY = 'yunque.recentEmoji'
+const RECENT_KEY = 'aido.recentEmoji'
 const RECENT_MAX = 16
 const recent = ref(readRecent())
 function readRecent() {

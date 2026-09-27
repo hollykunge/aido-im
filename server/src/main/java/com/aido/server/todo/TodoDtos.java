@@ -19,7 +19,7 @@ public final class TodoDtos {
 
   /**
    * @param today 是否在「今天」分组（planned_date 等于今天）
-   * @param due   截止时间的展示文案：优先用小雀给的说法（如「14:00 前」），否则按 dueAt 换算成「明天」「9月27日」
+   * @param due   截止时间的展示文案：优先用小A给的说法（如「14:00 前」），否则按 dueAt 换算成「明天」「9月27日」
    */
   public record TodoDto(
       long id,
@@ -55,6 +55,6 @@ public final class TodoDtos {
       OffsetDateTime dueAt,
       @Size(max = 500) String note) {}
 
-  /** 批量改状态：确认小雀的建议（open）或忽略（dismissed）。 */
+  /** 批量改状态：确认小A的建议（open）或忽略（dismissed）。 */
   public record BatchStatus(@NotEmpty List<Long> ids, @NotBlank @Pattern(regexp = "open|done|dismissed") String status) {}
 }

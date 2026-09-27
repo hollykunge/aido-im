@@ -11,7 +11,7 @@ export const useWorkspace = defineStore('workspace', () => {
   const conversations = ref([])
   const messages = ref({}) // 会话 id → 消息列表，打开会话时按需加载
   const todos = ref([]) // TODO 全部由 Agent 从消息中整理而来，也可手动新建
-  const summaries = ref({}) // 会话 id → 小雀摘要（没有时为 null）
+  const summaries = ref({}) // 会话 id → 小A摘要（没有时为 null）
   const replies = ref({}) // 会话 id → 建议回复
   const members = ref({}) // 会话 id → 成员（@ 提及用），按需加载
 
@@ -83,17 +83,17 @@ export const useWorkspace = defineStore('workspace', () => {
   const agentWidth = ref(readWidth())
   watch(agentWidth, (w) => {
     try {
-      localStorage.setItem('yunque.agentWidth', String(w))
+      localStorage.setItem('aido.agentWidth', String(w))
     } catch {}
   })
   function readWidth() {
     try {
-      const w = Number(localStorage.getItem('yunque.agentWidth'))
+      const w = Number(localStorage.getItem('aido.agentWidth'))
       if (w >= AGENT_W.min && w <= AGENT_W.max) return w
     } catch {}
     return AGENT_W.default
   }
-  // 设置面板（标题栏齿轮 / 小雀头像打开）
+  // 设置面板（标题栏齿轮 / 小A头像打开）
   const settingsOpen = ref(false)
   // Agent 写给主窗口聊天输入框的草稿：{ convId, text }
   const pendingDraft = ref(null)
@@ -164,7 +164,7 @@ export const useWorkspace = defineStore('workspace', () => {
         time: listTime(msg.sentAt),
         unread,
       })
-      // 自己回复了，小雀的「待回复」之类标记就不需要了
+      // 自己回复了，小A的「待回复」之类标记就不需要了
       if (msg.from === meId.value) c.agentFlag = null
     }
     // 正看着这个会话（且页面在前台）时收到的消息直接算已读

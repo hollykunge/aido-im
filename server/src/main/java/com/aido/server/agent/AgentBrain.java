@@ -4,7 +4,7 @@ import java.util.List;
 import tools.jackson.databind.node.ObjectNode;
 
 /**
- * 小雀的「大脑」：根据用户的话和主窗口上下文，给出思考步骤和要追加到对话流的卡片。
+ * 小A的「大脑」：根据用户的话和主窗口上下文，给出思考步骤和要追加到对话流的卡片。
  * 现在是规则实现（{@link RuleBasedAgentBrain}），接入大模型时实现这个接口替换即可，接口和前端都不用改。
  */
 public interface AgentBrain {

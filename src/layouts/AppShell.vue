@@ -24,7 +24,7 @@ const agentStore = useAgent()
 // 应用启动时就开始应用主题并跟随系统变化（切换入口在设置面板里）
 useTheme()
 
-// 小雀展开时，主功能区叠加与小雀头像同一套配色的淡渐变
+// 小A展开时，主功能区叠加与小A头像同一套配色的淡渐变
 const tintVars = computed(() => {
   const p = agentStore.palette
   return { '--t0': p.base, '--t1': p.colors[0], '--t2': p.colors[1], '--t3': p.colors[2], '--t4': p.colors[3] }
@@ -42,7 +42,7 @@ const tabIcons = { chat: MessageCircle, todo: ListTodo, search: Search }
 // —— 手机宽度：tab 栏移到底部作为导航条，顶部栏中间显示当前页面标题 ——
 const PAGE_TITLES = { memory: '记忆' }
 const pageTitle = computed(() => tabs.find((t) => t.name === route.name)?.label ?? PAGE_TITLES[route.name] ?? '')
-// 进入某个会话后全屏：隐藏顶部栏、悬浮的小雀头像和底部导航，会话自己的标题栏带返回（返回会话列表后恢复）
+// 进入某个会话后全屏：隐藏顶部栏、悬浮的小A头像和底部导航，会话自己的标题栏带返回（返回会话列表后恢复）
 const inConversation = computed(() => ws.isCompact && route.name === 'chat' && !!route.params.id)
 const showBottomNav = computed(() => ws.isCompact && !inConversation.value)
 
@@ -57,7 +57,7 @@ function fitTabs() {
   const m = measureEl.value
   if (!h || !m) return
   const cs = getComputedStyle(h)
-  // 左右两列各至少容纳一个头像（用户头像 / 小雀头像）加列间距，tab 栏才能正好居中
+  // 左右两列各至少容纳一个头像（用户头像 / 小A头像）加列间距，tab 栏才能正好居中
   const side = parseFloat(cs.getPropertyValue('--bar-h')) + parseFloat(cs.columnGap)
   const avail = h.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - side * 2
   iconOnly.value = m.offsetWidth + TAB_FIT_SLACK > avail
@@ -66,8 +66,8 @@ function fitTabs() {
 // —— Agent 容器宽度：拖拽分隔条调整 ——
 const WS_MIN = 360 // 主窗口至少保留的宽度
 const COLLAPSE_AT = 240 // 拖到比这更窄时松手即收起
-const GUTTER = 10 // 主区域与小雀之间的拖拽条宽度
-const EDGE = 4 // 主区域、小雀与窗口边框的距离（与 .win-body 的 padding 一致）
+const GUTTER = 10 // 主区域与小A之间的拖拽条宽度
+const EDGE = 4 // 主区域、小A与窗口边框的距离（与 .win-body 的 padding 一致）
 
 const winEl = ref(null)
 // 初始按视口估算（减去外边距），避免首帧宽度被压到最小再弹开
@@ -79,7 +79,7 @@ onMounted(() => {
     fitTabs()
   })
   ro.observe(winEl.value)
-  // 主窗口随小雀展开 / 收起逐帧变宽变窄；未读数变化会改变完整 tab 栏的宽度
+  // 主窗口随小A展开 / 收起逐帧变宽变窄；未读数变化会改变完整 tab 栏的宽度
   ro.observe(headerEl.value)
   ro.observe(measureEl.value)
   window.addEventListener('keydown', onHotkey)
@@ -89,7 +89,7 @@ onBeforeUnmount(() => {
   window.removeEventListener('keydown', onHotkey)
 })
 
-// 小雀头像右键菜单（记忆 / 设置）、tab 栏「更多」菜单
+// 小A头像右键菜单（记忆 / 设置）、tab 栏「更多」菜单
 const fabMenu = ref(false)
 const fabMenuEl = ref(null)
 const moreMenu = ref(false)
@@ -145,7 +145,7 @@ onBeforeUnmount(() => {
 function onHotkey(e) {
   if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
     e.preventDefault()
-    if (route.name === 'search') window.dispatchEvent(new Event('yunque:focus-search'))
+    if (route.name === 'search') window.dispatchEvent(new Event('aido:focus-search'))
     else router.push('/search')
   }
 }
@@ -227,7 +227,7 @@ function onResizerKey(e) {
       </header>
 
       <div ref="winEl" class="win-body">
-        <!-- 小雀头像：唯一入口，悬浮在右上角，点击展开 / 收起 -->
+        <!-- 小A头像：唯一入口，悬浮在右上角，点击展开 / 收起 -->
         <button
           class="agent-fab"
           :class="{ open: !ws.agentCollapsed }"
@@ -244,7 +244,7 @@ function onResizerKey(e) {
           </div>
         </Transition>
 
-      <!-- 主窗口：消息 / TODO / 搜索 / 更多（记忆在小雀头像右键菜单里） -->
+      <!-- 主窗口：消息 / TODO / 搜索 / 更多（记忆在小A头像右键菜单里） -->
       <main class="workspace" :style="tintVars">
         <header ref="headerEl" class="ws-header">
           <div class="head-left">
@@ -570,7 +570,7 @@ function onResizerKey(e) {
   background: var(--workspace);
   overflow: clip;
 }
-/* 小雀配色渐变层：头像颜色少量混入底色（浅色混白、深色混黑），展开小雀时淡入 */
+/* 小A配色渐变层：头像颜色少量混入底色（浅色混白、深色混黑），展开小A时淡入 */
 .workspace::before {
   content: '';
   position: absolute;
@@ -828,7 +828,7 @@ function onResizerKey(e) {
   container: ws / inline-size;
 }
 
-/* —— 弹出菜单：小雀头像右键菜单 / 「更多」菜单 —— */
+/* —— 弹出菜单：小A头像右键菜单 / 「更多」菜单 —— */
 .pop-menu {
   position: absolute;
   z-index: 6;
@@ -925,7 +925,7 @@ function onResizerKey(e) {
   transform: translate(-50%, 8px);
 }
 
-/* —— 悬浮的小雀头像 —— */
+/* —— 悬浮的小A头像 —— */
 .agent-fab {
   position: absolute;
   top: 12px;
@@ -949,7 +949,7 @@ function onResizerKey(e) {
 .agent-fab.open {
   box-shadow: var(--shadow-md), 0 0 0 2px var(--accent-soft), 0 0 0 0.5px var(--line-strong);
 }
-/* 小雀收起时，头像落在主窗口顶部栏右列，与左侧用户头像对称（win-body 内边距 4 + 顶部栏内边距 16） */
+/* 小A收起时，头像落在主窗口顶部栏右列，与左侧用户头像对称（win-body 内边距 4 + 顶部栏内边距 16） */
 .collapsed .agent-fab {
   right: 20px;
 }
@@ -957,11 +957,11 @@ function onResizerKey(e) {
   top: 8px;
   right: 10px;
 }
-/* 手机宽度下小雀面板有自己的标题栏（带返回），不再需要悬浮头像 */
+/* 手机宽度下小A面板有自己的标题栏（带返回），不再需要悬浮头像 */
 .window.compact:not(.collapsed) .agent-fab {
   display: none;
 }
-/* 手机宽度下进入会话：全屏显示会话，小雀入口在会话标题栏里 */
+/* 手机宽度下进入会话：全屏显示会话，小A入口在会话标题栏里 */
 .window.in-conv .ws-header,
 .window.in-conv .agent-fab {
   display: none;

@@ -21,7 +21,7 @@ public class CalendarRepository {
   /**
    * @param done      已经结束
    * @param now       正在进行
-   * @param agentNote 小雀为这场日程准备的提示
+   * @param agentNote 小A为这场日程准备的提示
    */
   public record EventDto(
       long id, String title, String place, OffsetDateTime startsAt, OffsetDateTime endsAt, String agentNote,

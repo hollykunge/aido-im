@@ -138,7 +138,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
         <input type="checkbox" class="switch" :checked="look.glasses" @change="toggleGlasses" />
       </label>
 
-      <!-- 能力：小雀的自动化开关 -->
+      <!-- 能力：小A的自动化开关 -->
       <div class="field">
         <div class="label">能力</div>
         <label v-for="c in store.capabilities" :key="c.key" class="cap" :title="c.desc">

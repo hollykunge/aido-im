@@ -43,7 +43,7 @@ public class AgentService {
     this.events = events;
   }
 
-  /** 小雀不可用时，所有 AI 接口返回 503；前端据此隐藏 AI 元素，基础功能照常使用。 */
+  /** 小A不可用时，所有 AI 接口返回 503；前端据此隐藏 AI 元素，基础功能照常使用。 */
   public void requireAvailable() {
     if (!props.enabled()) throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, props.name() + "暂时不可用");
   }

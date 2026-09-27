@@ -15,7 +15,7 @@
   <artifactId>aido-server</artifactId>
   <version>0.1.0</version>
   <name>aido-server</name>
-  <description>AIDo 5.0 后端服务：消息、TODO、日程、记忆、搜索与小雀助理</description>
+  <description>AIDo 5.0 后端服务：消息、TODO、日程、记忆、搜索与小A助理</description>
 
   <properties>
     <java.version>25</java.version>

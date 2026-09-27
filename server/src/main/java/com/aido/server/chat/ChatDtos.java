@@ -62,6 +62,6 @@ public final class ChatDtos {
 
   public record OpenDm(@NotBlank String userId) {}
 
-  /** 小雀对会话未读的摘要。 */
+  /** 小A对会话未读的摘要。 */
   public record SummaryDto(String conversationId, int count, List<String> points, OffsetDateTime generatedAt) {}
 }

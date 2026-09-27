@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.node.ObjectNode;
 
-/** 小雀对话流。返回给前端的每一项是 payload 的字段再加上 id / type / createdAt。 */
+/** 小A对话流。返回给前端的每一项是 payload 的字段再加上 id / type / createdAt。 */
 @Repository
 public class AgentFeedRepository {
 

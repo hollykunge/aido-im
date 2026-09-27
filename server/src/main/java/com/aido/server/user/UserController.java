@@ -90,7 +90,7 @@ public class UserController {
   public record PreferencePatch(
       @Pattern(regexp = "light|dark|system") String theme, JsonNode agentLook, Boolean memoryLearning) {}
 
-  /** 设置面板：主题、小雀形象；记忆页：是否从日常工作中学习。 */
+  /** 设置面板：主题、小A形象；记忆页：是否从日常工作中学习。 */
   @PatchMapping("/me/preferences")
   public PreferenceRepository.Preferences updatePreferences(
       @CurrentUser String me, @RequestBody @Valid PreferencePatch patch) {

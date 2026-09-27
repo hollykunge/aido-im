@@ -106,7 +106,7 @@ function rescan() {
       />
     </div>
 
-    <!-- 待确认：小雀从消息里识别出的建议 -->
+    <!-- 待确认：小A从消息里识别出的建议 -->
     <section v-if="suggested.length" class="group pending">
       <header>
         <h2><Sparkles :size="14" /> 待确认 <span>{{ suggested.length }}</span></h2>

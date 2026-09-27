@@ -55,7 +55,7 @@ watch([kw, () => agentStore.aiOk], ([k]) => {
   if (!k) return (result.value = null)
   timer = setTimeout(async () => {
     const my = ++seq
-    // AI 不可用时不搜小雀的待确认建议
+    // AI 不可用时不搜小A的待确认建议
     const r = await ws.attempt(() => api.search(k, agentStore.aiOk))
     if (my === seq && r) result.value = r
   }, 200)
@@ -119,10 +119,10 @@ onMounted(() => {
   roHead = new ResizeObserver(([e]) => (headH.value = Math.ceil(e.borderBoxSize?.[0]?.blockSize ?? e.target.offsetHeight)))
   roHead.observe(headEl.value)
   focus()
-  window.addEventListener('yunque:focus-search', focus)
+  window.addEventListener('aido:focus-search', focus)
 })
 onBeforeUnmount(() => {
-  window.removeEventListener('yunque:focus-search', focus)
+  window.removeEventListener('aido:focus-search', focus)
   roHead?.disconnect()
 })
 </script>
@@ -173,7 +173,7 @@ onBeforeUnmount(() => {
     </div>
 
     <template v-else>
-      <!-- AI 可用时：把问题交给小雀 -->
+      <!-- AI 可用时：把问题交给小A -->
       <button v-if="agentStore.aiOk && scope === 'all'" class="row ask" @click="askAgent">
         <AgentOrb :size="28" />
         <span class="row-main">

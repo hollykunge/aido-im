@@ -65,13 +65,13 @@ public class TodoController {
     return todos.update(me, id, body);
   }
 
-  /** 确认或忽略小雀的建议。 */
+  /** 确认或忽略小A的建议。 */
   @PostMapping("/status")
   public List<TodoDto> setStatus(@CurrentUser String me, @RequestBody @Valid BatchStatus body) {
     return todos.setStatus(me, body.ids(), body.status());
   }
 
-  /** 让小雀重新整理消息里的待办：找到新事项返回 200，已是最新返回 204。 */
+  /** 让小A重新整理消息里的待办：找到新事项返回 200，已是最新返回 204。 */
   @PostMapping("/rescan")
   public ResponseEntity<TodoDto> rescan(@CurrentUser String me) {
     return todos.rescan(me).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
