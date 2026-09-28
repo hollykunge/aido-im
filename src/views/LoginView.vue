@@ -131,7 +131,7 @@ h1 {
   height: 40px;
   padding: 0 12px;
   border: 0;
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   outline: none;
   background: var(--card-sub);
   box-shadow: inset 0 0 0 1px var(--line-strong);
@@ -158,7 +158,7 @@ h1 {
   height: 30px;
   display: grid;
   place-items: center;
-  border-radius: 8px;
+  border-radius: var(--r-xs);
   color: var(--text-3);
   transform: translateY(-50%);
 }

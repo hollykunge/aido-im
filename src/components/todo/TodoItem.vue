@@ -85,7 +85,7 @@ function draftReply() {
   align-items: flex-start;
   gap: 10px;
   padding: 11px 14px;
-  border-radius: 14px;
+  border-radius: var(--r-md);
   background: var(--card);
   box-shadow: var(--shadow-sm), 0 0 0 0.5px var(--line);
   transition: box-shadow 0.2s, opacity 0.2s;
@@ -168,7 +168,7 @@ h3 {
   align-items: flex-start;
   gap: 8px;
   padding: 8px 10px;
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   background: var(--card-sub);
   text-align: left;
   transition: background 0.15s;
@@ -209,7 +209,7 @@ h3 {
   gap: 4px;
   height: 28px;
   padding: 0 8px;
-  border-radius: 8px;
+  border-radius: var(--r-xs);
   font-size: 12px;
   color: var(--text-2);
 }

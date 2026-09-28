@@ -128,7 +128,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
               <Pipette v-else :size="14" />
             </span>
             <span class="name">自定义</span>
-            <input type="color" :value="look.custom || '#12b5a0'" @input="pickCustom" />
+            <input type="color" :value="look.custom || '#2f6bf0'" @input="pickCustom" />
           </label>
         </div>
       </div>
@@ -174,7 +174,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
   max-height: calc(100% - 48px);
   overflow-y: auto;
   padding: 14px 16px 12px;
-  border-radius: 20px;
+  border-radius: var(--r-lg);
   background: var(--popover);
   box-shadow: var(--shadow-pop), 0 0 0 0.5px var(--line-strong);
   animation: pop 0.3s var(--ease-spring);
@@ -325,7 +325,7 @@ footer {
   gap: 4px;
   height: 28px;
   padding: 0 10px;
-  border-radius: 8px;
+  border-radius: var(--r-xs);
   font-size: 12px;
   color: var(--text-2);
 }
@@ -335,7 +335,7 @@ footer {
 }
 /* —— 手机宽度：底部抽屉 —— */
 .layer.sheet {
-  background: rgba(0, 0, 0, 0.32);
+  background: var(--scrim);
   animation: fade 0.2s;
 }
 .sheet .panel {

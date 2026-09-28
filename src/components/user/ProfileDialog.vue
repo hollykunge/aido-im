@@ -57,7 +57,7 @@ async function saveName() {
 }
 
 // —— 头像颜色：点色块立即保存；也可以自选颜色 ——
-const COLORS = ['#12b5a0', '#0ea5e9', '#6366f1', '#a855f7', '#ec4899', '#ef4444', '#f97316', '#f59e0b', '#84cc16', '#64748b']
+const COLORS = ['#2f6bf0', '#12b5a0', '#0ea5e9', '#6366f1', '#a855f7', '#ec4899', '#ef4444', '#f97316', '#f59e0b', '#84cc16', '#64748b']
 const color = computed(() => ws.users[ws.meId]?.color)
 const isCustom = computed(() => color.value && !COLORS.includes(color.value))
 function pickColor(c) {
@@ -168,7 +168,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
           />
           <label class="swatch custom" :class="{ on: isCustom }" :style="isCustom ? { background: color } : null" title="自选颜色">
             <Pipette v-if="!isCustom" :size="13" />
-            <input type="color" :value="color || '#12b5a0'" @change="pickColor($event.target.value)" />
+            <input type="color" :value="color || '#2f6bf0'" @change="pickColor($event.target.value)" />
           </label>
         </div>
       </div>
@@ -236,7 +236,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
   max-height: 100%;
   overflow-y: auto;
   padding: 14px 16px 16px;
-  border-radius: 20px;
+  border-radius: var(--r-lg);
   background: var(--popover);
   box-shadow: var(--shadow-pop), 0 0 0 0.5px var(--line-strong);
   animation: pop 0.3s var(--ease-spring);
@@ -275,11 +275,11 @@ h3 {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #22c55e;
+  background: var(--online);
   box-shadow: 0 0 0 3px var(--workspace);
 }
 .dot.connecting {
-  background: #f59e0b;
+  background: var(--away);
 }
 .dot.offline {
   background: var(--text-3);
@@ -401,7 +401,7 @@ dd {
   gap: 10px;
   height: 40px;
   padding: 0 8px;
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   font-size: 14px;
   color: var(--text-1);
 }

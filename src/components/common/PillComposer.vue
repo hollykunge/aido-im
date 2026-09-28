@@ -128,7 +128,7 @@ defineExpose({ focus: () => input.value?.focus(), insert, el: input })
   align-items: end;
   column-gap: 2px;
   padding: 6px;
-  border-radius: 26px;
+  border-radius: var(--r-xl);
   background: var(--card);
   box-shadow: 0 0 0 0.5px var(--line-strong), var(--shadow-sm);
   pointer-events: auto;
@@ -141,10 +141,10 @@ defineExpose({ focus: () => input.value?.focus(), insert, el: input })
     'left . right send';
   row-gap: 4px;
   padding: 8px 6px 6px;
-  border-radius: 20px;
+  border-radius: var(--r-lg);
 }
 .pill:focus-within {
-  box-shadow: 0 0 0 1px rgba(18, 181, 160, 0.45), var(--shadow-sm);
+  box-shadow: 0 0 0 1px var(--accent-ring), var(--shadow-sm);
 }
 .pill.flash {
   box-shadow: 0 0 0 2px var(--accent), 0 0 0 6px var(--accent-soft);
@@ -198,12 +198,12 @@ textarea::placeholder {
   place-items: center;
   border-radius: 50%;
   background: var(--fill-muted);
-  color: #fff;
+  color: var(--on-accent);
   transition: background 0.2s, transform 0.15s;
 }
 .send.on {
   background: var(--accent);
-  box-shadow: 0 4px 12px rgba(18, 181, 160, 0.35);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 35%, transparent);
 }
 .send.on:active {
   transform: scale(0.92);

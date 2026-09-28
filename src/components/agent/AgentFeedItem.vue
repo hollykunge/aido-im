@@ -136,7 +136,7 @@ function focusTodo(id) {
   padding: 2px 8px;
   font-size: 14px;
   color: var(--text-2);
-  border-radius: 8px;
+  border-radius: var(--r-xs);
 }
 .status-line:hover {
   background: var(--hover);
@@ -170,7 +170,7 @@ function focusTodo(id) {
 .bullets li {
   position: relative;
   padding: 6px 26px 6px 22px;
-  border-radius: 10px;
+  border-radius: var(--r-sm);
 }
 .bullets li::before {
   content: '';
@@ -217,10 +217,10 @@ function focusTodo(id) {
 .user-bubble {
   padding: 10px 16px;
   border-radius: 18px 18px 6px 18px;
-  background: linear-gradient(135deg, #1bc2ab, #12a893);
-  color: #fff;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 90%, #fff), color-mix(in srgb, var(--accent) 92%, #000));
+  color: var(--on-accent);
   font-size: 15px;
-  box-shadow: 0 4px 14px rgba(18, 181, 160, 0.25);
+  box-shadow: 0 4px 14px var(--accent-line);
 }
 
 .thinking {
@@ -273,7 +273,7 @@ function focusTodo(id) {
   flex: none;
   display: grid;
   place-items: center;
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   background: var(--blue-soft);
   color: var(--blue);
 }
@@ -355,7 +355,7 @@ function focusTodo(id) {
   padding: 12px 14px 14px;
   border-radius: 18px;
   background: linear-gradient(180deg, var(--accent-softer), var(--card));
-  box-shadow: 0 0 0 1px rgba(18, 181, 160, 0.22);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
   animation: rise 0.35s var(--ease-spring);
 }
 .draft-head {

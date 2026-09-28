@@ -72,7 +72,7 @@ function pick(e) {
 .tabs button {
   height: 26px;
   padding: 0 10px;
-  border-radius: 8px;
+  border-radius: var(--r-xs);
   font-size: 12px;
   color: var(--text-2);
 }
@@ -95,7 +95,7 @@ function pick(e) {
   aspect-ratio: 1;
   display: grid;
   place-items: center;
-  border-radius: 8px;
+  border-radius: var(--r-xs);
   font-size: 22px;
   line-height: 1;
 }

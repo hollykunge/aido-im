@@ -38,11 +38,12 @@ const initial = computed(() => {
   display: inline-grid;
   place-items: center;
   border-radius: 50%;
-  color: #fff;
+  /* 浅色底 + 同色系深色字（暗色下为深底浅字），比例见 base.css 的 --avatar-bg / --avatar-fg */
+  color: color-mix(in srgb, var(--c) var(--avatar-fg), var(--text-1));
   font-weight: 600;
   letter-spacing: -0.02em;
-  background: linear-gradient(145deg, color-mix(in srgb, var(--c) 78%, #fff), var(--c));
-  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.06);
+  background: color-mix(in srgb, var(--c) var(--avatar-bg), var(--card));
+  box-shadow: inset 0 0 0 0.5px color-mix(in srgb, var(--c) 20%, transparent);
   user-select: none;
 }
 .avatar.square {

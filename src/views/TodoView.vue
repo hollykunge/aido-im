@@ -205,9 +205,9 @@ function rescan() {
   padding: 0 16px;
   border: 0;
   outline: 0;
-  border-radius: 14px;
+  border-radius: var(--r-md);
   background: var(--card);
-  box-shadow: 0 0 0 1px rgba(18, 181, 160, 0.45), var(--shadow-sm);
+  box-shadow: 0 0 0 1px var(--accent-ring), var(--shadow-sm);
   font-size: 14px;
 }
 .add input::placeholder {
@@ -246,9 +246,9 @@ h2 span {
 }
 .pending {
   padding: 12px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, rgba(47, 124, 246, 0.06), rgba(18, 181, 160, 0.1));
-  box-shadow: inset 0 0 0 1px rgba(18, 181, 160, 0.18);
+  border-radius: var(--r-lg);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-2) 6%, transparent), color-mix(in srgb, var(--accent) 10%, transparent));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent);
 }
 .pending h2 {
   color: var(--accent-strong);
@@ -338,8 +338,8 @@ h2 span {
   place-items: center;
   border-radius: 50%;
   background: var(--accent);
-  color: #fff;
-  box-shadow: 0 6px 18px rgba(18, 181, 160, 0.35), 0 2px 6px rgba(0, 0, 0, 0.12);
+  color: var(--on-accent);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 35%, transparent), 0 2px 6px rgba(0, 0, 0, 0.12);
   transition: transform 0.2s var(--ease-spring);
   -webkit-tap-highlight-color: transparent;
 }

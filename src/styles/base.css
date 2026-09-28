@@ -1,15 +1,31 @@
 :root {
-  /* 品牌色：AIDo 青 */
-  --accent: #12b5a0;
-  --accent-strong: #0c9a88;
-  --accent-soft: rgba(18, 181, 160, 0.12);
-  --accent-softer: rgba(18, 181, 160, 0.07);
-  --blue: #2f7cf6;
-  --blue-soft: rgba(47, 124, 246, 0.1);
+  /* 品牌色：AIDo 蓝 */
+  --accent: #2f6bf0;
+  --accent-strong: #1f55d0;
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
+  --accent-softer: color-mix(in srgb, var(--accent) 7%, transparent);
+  /* 渐变的第二色：靛紫，与品牌蓝搭配 */
+  --accent-2: #7a5cf0;
+  /* 链接、@ 提及等信息色，与品牌色同属蓝色系 */
+  --blue: #2f6bf0;
+  --blue-soft: color-mix(in srgb, var(--blue) 10%, transparent);
   --danger: #ef4444;
   --danger-soft: rgba(239, 68, 68, 0.1);
   --warn: #f59e0b;
   --warn-soft: rgba(245, 158, 11, 0.12);
+  /* 品牌色派生：描边、光晕都从 --accent 混出来，暗色 / 换品牌色时自动跟随 */
+  --on-accent: #ffffff;
+  --accent-ring: color-mix(in srgb, var(--accent) 45%, transparent);
+  --accent-line: color-mix(in srgb, var(--accent) 25%, transparent);
+  --accent-glow: 0 4px 14px color-mix(in srgb, var(--accent) 30%, transparent);
+  --blue-glow: 0 4px 14px color-mix(in srgb, var(--blue) 28%, transparent);
+  /* 在线状态 */
+  --online: #22c55e;
+  --away: #f59e0b;
+  --scrim: rgba(20, 24, 40, 0.32); /* 弹窗遮罩 */
+  /* 头像：用户色只做浅底和文字色，不铺满实色，列表里不抢眼 */
+  --avatar-bg: 16%;
+  --avatar-fg: 72%;
 
   --text-1: #1b1c21;
   --text-2: #565a66;
@@ -22,7 +38,6 @@
     linear-gradient(135deg, #8d7fb8 0%, #c98fa4 50%, #e6a071 100%);
   /* 窗口与主功能区同色，不形成差异 */
   --window: #ffffff;
-  --agent-pane: #f1f1f4;
   /* 主功能区：小A收起时纯白 / 纯黑；展开时叠加小A配色的淡渐变（见 AppShell） */
   --workspace: #ffffff;
   --card: #ffffff;
@@ -34,8 +49,8 @@
   /* 列表项状态（会话列表、@ 选人等）：悬停用中性浅灰，选中用品牌色浅底，二者一眼能分开；
      都是半透明叠加，放在白底、毛玻璃、小A配色渐变上都看得出来 */
   --list-hover: rgba(20, 24, 40, 0.05);
-  --list-active: rgba(18, 181, 160, 0.13);
-  --list-active-hover: rgba(18, 181, 160, 0.18);
+  --list-active: color-mix(in srgb, var(--accent) 12%, transparent);
+  --list-active-hover: color-mix(in srgb, var(--accent) 17%, transparent);
 
   /* 语义化表面 */
   --edge-hi: rgba(255, 255, 255, 0.9); /* 玻璃面板的内高光 */
@@ -45,7 +60,7 @@
   --hero: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.55));
   --popover: #ffffff;
   --bubble: #f1f2f5;
-  --bubble-mine: #d8f4ef;
+  --bubble-mine: #dde8fe;
   --bubble-mention: #fff7e0;
   --fill-muted: #e6e8ed; /* 未激活图标底、禁用按钮 */
   --fill-strong: #cfd2d9; /* 开关关闭、次要徽标 */
@@ -63,6 +78,7 @@
   --seg-active: #ffffff;
   --seg-active-shadow: 0 1px 3px rgba(20, 24, 40, 0.16), 0 0 0 0.5px rgba(20, 24, 40, 0.08);
 
+  --r-xs: 8px;
   --r-sm: 10px;
   --r-md: 14px;
   --r-lg: 20px;
@@ -85,15 +101,23 @@
 
 /* —— 暗色主题 —— */
 :root[data-theme='dark'] {
-  --accent: #19c2ac;
-  --accent-strong: #4fd9c5;
-  --accent-soft: rgba(25, 194, 172, 0.18);
-  --accent-softer: rgba(25, 194, 172, 0.1);
-  --blue: #5b95ff;
-  --blue-soft: rgba(91, 149, 255, 0.16);
+  --accent: #4a86ff;
+  --accent-strong: #86abff;
+  --accent-soft: color-mix(in srgb, var(--accent) 18%, transparent);
+  --accent-softer: color-mix(in srgb, var(--accent) 10%, transparent);
+  --accent-2: #9b82ff;
+  --blue: #6a9cff;
+  --blue-soft: color-mix(in srgb, var(--blue) 16%, transparent);
   --danger: #f05252;
   --danger-soft: rgba(248, 113, 113, 0.16);
   --warn-soft: rgba(251, 191, 36, 0.16);
+  --accent-glow: 0 4px 14px color-mix(in srgb, var(--accent) 22%, transparent);
+  --blue-glow: 0 4px 14px color-mix(in srgb, var(--blue) 22%, transparent);
+  --online: #34d399;
+  --away: #fbbf24;
+  --scrim: rgba(0, 0, 0, 0.5);
+  --avatar-bg: 26%;
+  --avatar-fg: 55%;
 
   --text-1: #eceef3;
   --text-2: #a9afbc;
@@ -113,8 +137,8 @@
   --hover-strong: rgba(255, 255, 255, 0.09);
   --card-hover: #2c2f3b;
   --list-hover: rgba(255, 255, 255, 0.07);
-  --list-active: rgba(25, 194, 172, 0.2);
-  --list-active-hover: rgba(25, 194, 172, 0.26);
+  --list-active: color-mix(in srgb, var(--accent) 20%, transparent);
+  --list-active-hover: color-mix(in srgb, var(--accent) 26%, transparent);
 
   --edge-hi: rgba(255, 255, 255, 0.06);
   --glass-1: rgba(255, 255, 255, 0.05);
@@ -123,7 +147,7 @@
   --hero: linear-gradient(135deg, rgba(46, 48, 61, 0.92), rgba(34, 36, 46, 0.72));
   --popover: #26282f;
   --bubble: #2c2f3a;
-  --bubble-mine: #1b4842;
+  --bubble-mine: #1e3561;
   --bubble-mention: #3a3121;
   --fill-muted: #33363f;
   --fill-strong: #474b57;
@@ -202,6 +226,20 @@ textarea {
   background: transparent;
 }
 
+/* 键盘焦点：统一的品牌色焦点环。:where 不加优先级，组件里可以自行覆盖 */
+:where(button, a, [role='button'], [role='tab'], [role='menuitem'], [role='radio'], [tabindex]):focus-visible {
+  outline: 2px solid var(--accent-ring);
+  outline-offset: 2px;
+}
+
+/* 切换浅色 / 深色的那一帧关掉过渡，避免各处颜色参差不齐地渐变（见 useTheme） */
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}
+
 /* —— 通用小组件 —— */
 .icon-btn {
   width: 36px;
@@ -246,23 +284,23 @@ textarea {
 }
 .btn-primary {
   background: var(--accent);
-  color: #fff;
-  box-shadow: 0 4px 14px rgba(18, 181, 160, 0.3);
+  color: var(--on-accent);
+  box-shadow: var(--accent-glow);
 }
 .btn-primary:hover {
   filter: brightness(1.05);
 }
 .btn-blue {
   background: var(--blue);
-  color: #fff;
-  box-shadow: 0 4px 14px rgba(47, 124, 246, 0.28);
+  color: var(--on-accent);
+  box-shadow: var(--blue-glow);
 }
 .btn-soft {
   background: var(--accent-soft);
   color: var(--accent-strong);
 }
 .btn-soft:hover {
-  background: rgba(18, 181, 160, 0.18);
+  background: var(--list-active-hover);
 }
 .btn-plain {
   background: var(--card);
@@ -284,7 +322,7 @@ textarea {
   gap: 4px;
   height: 26px;
   padding: 0 10px;
-  border-radius: 8px;
+  border-radius: var(--r-xs);
   font-size: 13px;
   font-weight: 600;
   background: var(--accent-soft);
@@ -325,7 +363,7 @@ textarea {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #fff;
+  background: #fff; /* 开关滑块两种主题下都是白色 */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   transition: transform 0.25s var(--ease-spring);
 }
@@ -344,4 +382,18 @@ textarea {
 .fade-leave-to {
   opacity: 0;
   transform: translateY(6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ease-spring: ease-out;
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.12s;
+  }
+  .fade-enter-from,
+  .fade-leave-to {
+    transform: none;
+  }
 }

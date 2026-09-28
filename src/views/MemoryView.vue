@@ -200,7 +200,7 @@ h1 {
   align-items: center;
   gap: 10px;
   padding: 8px 10px 8px 14px;
-  border-radius: 14px;
+  border-radius: var(--r-md);
   background: var(--card-sub);
   font-size: 13px;
   font-weight: 500;
@@ -221,7 +221,7 @@ h2 {
 }
 .group {
   padding: 12px 16px;
-  border-radius: 14px;
+  border-radius: var(--r-md);
   background: var(--card-sub);
 }
 .group + .group {
@@ -270,7 +270,7 @@ h2 {
 .items {
   display: flex;
   flex-direction: column;
-  border-radius: 14px;
+  border-radius: var(--r-md);
   background: var(--card-sub);
   overflow: hidden;
 }
@@ -295,7 +295,7 @@ h2 {
   margin: -4px 0 2px -8px;
   padding: 4px 8px;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--r-xs);
   outline: none;
   resize: none;
   field-sizing: content;
@@ -332,7 +332,7 @@ h2 {
   align-items: center;
   gap: 12px;
   padding: 12px 14px;
-  border-radius: 14px;
+  border-radius: var(--r-md);
   background: var(--card-sub);
   cursor: pointer;
 }
@@ -341,7 +341,7 @@ h2 {
   height: 36px;
   display: grid;
   place-items: center;
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   background: var(--fill-muted);
   color: var(--text-3);
 }

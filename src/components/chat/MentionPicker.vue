@@ -72,7 +72,7 @@ watch(
   gap: 8px;
   height: 40px;
   padding: 0 8px;
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   text-align: left;
 }
 /* 当前选中（键盘上下或鼠标移入）的人 */

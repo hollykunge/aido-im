@@ -609,7 +609,8 @@ function nameOf(m) {
 .chat {
   height: 100%;
   display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
+  /* 跟随主区域连续缩放，面板开合经过 860px 时不再突然跳 50px。 */
+  grid-template-columns: clamp(250px, calc(20cqw + 78px), 300px) minmax(0, 1fr);
   gap: 12px;
   padding: 0 16px 16px;
 }
@@ -691,7 +692,7 @@ function nameOf(m) {
   display: flex;
   gap: 10px;
   padding: 10px;
-  border-radius: 14px;
+  border-radius: var(--r-md);
   text-align: left;
   transition: background 0.15s;
 }
@@ -760,7 +761,7 @@ function nameOf(m) {
   padding: 0 5px;
   border-radius: 9px;
   background: var(--danger);
-  color: #fff;
+  color: var(--on-accent);
   font-size: 11px;
   font-weight: 600;
   line-height: 18px;
@@ -840,7 +841,7 @@ function nameOf(m) {
   align-items: center;
   margin: 10px 16px 0;
   padding: 4px 4px 4px 6px;
-  border-radius: 14px;
+  border-radius: var(--r-md);
   background: var(--accent-softer);
 }
 .tip-row {
@@ -998,7 +999,7 @@ function nameOf(m) {
   gap: 12px;
   width: 300px;
   padding: 12px 14px;
-  border-radius: 14px;
+  border-radius: var(--r-md);
   background: var(--card);
   box-shadow: 0 0 0 0.5px var(--line-strong), var(--shadow-sm);
 }
@@ -1039,7 +1040,7 @@ function nameOf(m) {
 .image {
   display: block;
   max-width: min(260px, 100%);
-  border-radius: 14px;
+  border-radius: var(--r-md);
   overflow: hidden;
   box-shadow: 0 0 0 0.5px var(--line-strong), var(--shadow-sm);
   line-height: 0;
@@ -1094,7 +1095,7 @@ function nameOf(m) {
   height: 40px;
   display: grid;
   place-items: center;
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   background: var(--pink-soft);
   color: var(--pink);
 }
@@ -1169,7 +1170,7 @@ function nameOf(m) {
   border-radius: 999px;
   font-size: 13px;
   color: var(--text-1);
-  box-shadow: inset 0 0 0 1px rgba(18, 181, 160, 0.3), var(--shadow-sm);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent), var(--shadow-sm);
   transition: background 0.15s;
 }
 .rep:hover {
@@ -1190,8 +1191,8 @@ function nameOf(m) {
   border-radius: 999px;
   font-size: 13px;
   font-weight: 600;
-  color: #fff;
-  background: linear-gradient(120deg, var(--blue), var(--accent));
+  color: var(--on-accent);
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
 }
 
 .back {
@@ -1244,11 +1245,6 @@ function nameOf(m) {
 }
 
 /* —— 响应式：按主窗口宽度 —— */
-@container ws (max-width: 860px) {
-  .chat {
-    grid-template-columns: 250px minmax(0, 1fr);
-  }
-}
 /* 窄：列表与会话二选一 */
 @container ws (max-width: 680px) {
   .chat {

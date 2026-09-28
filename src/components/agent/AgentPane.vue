@@ -290,7 +290,7 @@ function send(text) {
 .chip:hover:not(:disabled) {
   color: var(--accent-strong);
   background: color-mix(in srgb, var(--accent) 12%, var(--card));
-  box-shadow: 0 0 0 1px rgba(18, 181, 160, 0.4);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent);
 }
 .chip:disabled {
   opacity: 0.5;

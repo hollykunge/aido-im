@@ -291,12 +291,12 @@ onBeforeUnmount(() => {
   gap: 10px;
   height: 52px;
   padding: 0 10px 0 18px;
-  border-radius: 26px;
+  border-radius: var(--r-xl);
   background: var(--card);
   box-shadow: var(--shadow-md), 0 0 0 0.5px var(--line-strong);
 }
 .box:focus-within {
-  box-shadow: var(--shadow-md), 0 0 0 1.5px rgba(18, 181, 160, 0.5);
+  box-shadow: var(--shadow-md), 0 0 0 1.5px color-mix(in srgb, var(--accent) 50%, transparent);
 }
 .box input {
   flex: 1;
@@ -487,7 +487,7 @@ h2 {
   height: 34px;
   display: grid;
   place-items: center;
-  border-radius: 10px;
+  border-radius: var(--r-sm);
 }
 .file-ic {
   background: var(--pink-soft);

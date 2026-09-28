@@ -52,15 +52,15 @@ const TAB_FIT_SLACK = 24 // 提前一点切换，给文字收起动画留余量
 const headerEl = ref(null)
 const measureEl = ref(null)
 const iconOnly = ref(false)
+let headerContentWidth = 0
+let fullTabsWidth = 0
+let headerSideSpace = 0
 function fitTabs() {
-  const h = headerEl.value
-  const m = measureEl.value
-  if (!h || !m) return
-  const cs = getComputedStyle(h)
-  // 左右两列各至少容纳一个头像（用户头像 / 小A头像）加列间距，tab 栏才能正好居中
-  const side = parseFloat(cs.getPropertyValue('--bar-h')) + parseFloat(cs.columnGap)
-  const avail = h.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - side * 2
-  iconOnly.value = m.offsetWidth + TAB_FIT_SLACK > avail
+  if (!headerContentWidth || !fullTabsWidth) return
+  const avail = headerContentWidth - headerSideSpace
+  // 收起与展开留一点间隔，避免临界宽度附近反复切换。
+  const slack = TAB_FIT_SLACK + (iconOnly.value ? 8 : 0)
+  iconOnly.value = fullTabsWidth + slack > avail
 }
 
 // —— Agent 容器宽度：拖拽分隔条调整 ——
@@ -74,8 +74,15 @@ const winEl = ref(null)
 const winWidth = ref(window.innerWidth - 36 - EDGE * 2)
 let ro
 onMounted(() => {
+  const cs = getComputedStyle(headerEl.value)
+  headerSideSpace = (parseFloat(cs.getPropertyValue('--bar-h')) + parseFloat(cs.columnGap)) * 2
   ro = new ResizeObserver((entries) => {
-    for (const e of entries) if (e.target === winEl.value) winWidth.value = e.contentRect.width
+    for (const e of entries) {
+      if (e.target === winEl.value) winWidth.value = e.contentRect.width
+      if (e.target === headerEl.value) headerContentWidth = e.contentRect.width
+      if (e.target === measureEl.value) fullTabsWidth = e.borderBoxSize?.[0]?.inlineSize ?? e.contentRect.width + 6
+    }
+    // 使用观察器给出的尺寸，动画每帧不再额外读取布局。
     fitTabs()
   })
   ro.observe(winEl.value)
@@ -231,6 +238,8 @@ function onResizerKey(e) {
         <button
           class="agent-fab"
           :class="{ open: !ws.agentCollapsed }"
+          aria-controls="agent-panel"
+          :aria-expanded="!ws.agentCollapsed"
           :title="`${ws.agentCollapsed ? '展开' : '收起'}${agentStore.name} · 右键更多`"
           @click="ws.agentCollapsed = !ws.agentCollapsed"
           @contextmenu.prevent="fabMenu = true"
@@ -245,7 +254,7 @@ function onResizerKey(e) {
         </Transition>
 
       <!-- 主窗口：消息 / TODO / 搜索 / 更多（记忆在小A头像右键菜单里） -->
-      <main class="workspace" :style="tintVars">
+      <main class="workspace" :style="tintVars" :inert="ws.isCompact && !ws.agentCollapsed">
         <header ref="headerEl" class="ws-header">
           <div class="head-left">
             <!-- 用户头像：圆形，在线状态在右下角 -->
@@ -399,7 +408,7 @@ function onResizerKey(e) {
       </div>
 
       <!-- 外层容器：个人 Agent（右侧） -->
-      <aside class="agent-slot" :class="{ 'will-collapse': willCollapse }" :style="slotStyle" :aria-hidden="ws.agentCollapsed">
+      <aside id="agent-panel" class="agent-slot" :class="{ 'will-collapse': willCollapse }" :style="slotStyle" :aria-hidden="ws.agentCollapsed" :inert="ws.agentCollapsed">
         <AgentPane />
       </aside>
       </div>
@@ -425,11 +434,13 @@ function onResizerKey(e) {
   padding: 0;
 }
 .window {
+  --panel-duration: 280ms;
+  --panel-ease: cubic-bezier(0.22, 0.68, 0, 1);
   position: relative;
   height: 100%;
   display: flex;
   flex-direction: column;
-  border-radius: 8px;
+  border-radius: var(--r-xs);
   background: var(--window);
   box-shadow: var(--shadow-window);
   overflow: hidden;
@@ -510,10 +521,18 @@ function onResizerKey(e) {
 .agent-slot {
   flex: none;
   overflow: hidden;
-  transition: width 0.5s var(--ease-spring), opacity 0.3s;
+  contain: layout paint;
+  transition: width var(--panel-duration) var(--panel-ease), opacity var(--panel-duration) var(--panel-ease);
+}
+.agent-slot :deep(.agent-pane) {
+  transition: transform var(--panel-duration) var(--panel-ease);
 }
 .collapsed .agent-slot {
   opacity: 0;
+  pointer-events: none;
+}
+.collapsed .agent-slot :deep(.agent-pane) {
+  transform: translateX(12px);
 }
 .agent-slot.will-collapse {
   opacity: 0.45;
@@ -529,7 +548,7 @@ function onResizerKey(e) {
   cursor: col-resize;
   touch-action: none;
   outline: none;
-  transition: width 0.5s var(--ease-spring);
+  transition: width var(--panel-duration) var(--panel-ease);
 }
 .resizer i {
   width: 4px;
@@ -554,7 +573,8 @@ function onResizerKey(e) {
   user-select: none;
 }
 .resizing .agent-slot,
-.resizing .resizer {
+.resizing .resizer,
+.resizing .agent-slot :deep(.agent-pane) {
   transition: none;
 }
 
@@ -587,7 +607,7 @@ function onResizerKey(e) {
       color-mix(in srgb, var(--t4) 14%, var(--workspace)) 100%
     );
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity var(--panel-duration) var(--panel-ease);
 }
 .window:not(.collapsed) .workspace::before {
   opacity: 1;
@@ -697,11 +717,11 @@ function onResizerKey(e) {
   height: 7px;
   margin-right: 5px;
   border-radius: 50%;
-  background: #22c55e;
+  background: var(--online);
   vertical-align: 1px;
 }
 .user-menu .presence.connecting::before {
-  background: #f59e0b;
+  background: var(--away);
 }
 .user-menu .presence.offline::before {
   background: var(--text-3);
@@ -743,7 +763,7 @@ function onResizerKey(e) {
   padding: 0 5px;
   border-radius: 9px;
   background: var(--danger);
-  color: #fff;
+  color: var(--on-accent);
   font-size: 11px;
   font-weight: 600;
   line-height: 18px;
@@ -761,7 +781,7 @@ function onResizerKey(e) {
   height: 15px;
   margin-left: 0;
   padding: 0 4px;
-  border-radius: 8px;
+  border-radius: var(--r-xs);
   font-size: 9.5px;
   line-height: 15px;
   box-shadow: 0 0 0 1.5px var(--card);
@@ -807,12 +827,12 @@ function onResizerKey(e) {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #22c55e;
+  background: var(--online);
   box-shadow: 0 0 0 2px var(--card);
   transition: background 0.3s;
 }
 .status-dot.connecting {
-  background: #f59e0b;
+  background: var(--away);
 }
 .status-dot.offline {
   background: var(--text-3);
@@ -834,7 +854,7 @@ function onResizerKey(e) {
   z-index: 6;
   min-width: 140px;
   padding: 5px;
-  border-radius: 14px;
+  border-radius: var(--r-md);
   background: var(--popover);
   box-shadow: var(--shadow-pop), 0 0 0 0.5px var(--line-strong);
   transform-origin: top right;
@@ -938,7 +958,7 @@ function onResizerKey(e) {
   border-radius: 50%;
   background: var(--card);
   box-shadow: var(--shadow-md), 0 0 0 0.5px var(--line-strong);
-  transition: transform 0.2s var(--ease-spring), box-shadow 0.2s, right 0.5s var(--ease-spring);
+  transition: transform 0.2s var(--ease-spring), box-shadow 0.2s, right var(--panel-duration) var(--panel-ease);
 }
 .agent-fab:hover {
   transform: scale(1.06);
@@ -984,22 +1004,38 @@ function onResizerKey(e) {
 .compact .workspace {
   border-radius: 0;
 }
-/* 手机宽度下 Agent 与主窗口二选一，都占满整屏 */
+/* 手机面板覆盖主窗口，用位移动画避免把主窗口先隐藏后再撑开。 */
 .compact .agent-slot {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
   width: 100%;
   --agent-w: 100%;
+  background: var(--window);
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform var(--panel-duration) var(--panel-ease), opacity var(--panel-duration) var(--panel-ease), visibility 0s;
 }
 .compact.collapsed .agent-slot {
-  width: 0;
+  width: 100%;
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform var(--panel-duration) var(--panel-ease), opacity var(--panel-duration) var(--panel-ease), visibility 0s var(--panel-duration);
 }
-.window.compact:not(.collapsed) .workspace {
-  display: none;
+.compact .agent-slot :deep(.agent-pane) {
+  transform: none;
 }
 .compact .resizer {
   display: none;
 }
 .desktop.compact {
   padding: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .window {
+    --panel-duration: 0s;
+  }
 }
 
 .compact .ws-header {
@@ -1064,9 +1100,9 @@ function onResizerKey(e) {
   min-width: 16px;
   height: 16px;
   padding: 0 4px;
-  border-radius: 8px;
+  border-radius: var(--r-xs);
   background: var(--danger);
-  color: #fff;
+  color: var(--on-accent);
   font-size: 10px;
   font-weight: 600;
   line-height: 16px;

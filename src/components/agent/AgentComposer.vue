@@ -72,7 +72,7 @@ function submit() {
   font-size: 12px;
   color: var(--text-2);
   background: var(--card);
-  box-shadow: inset 0 0 0 1px rgba(18, 181, 160, 0.25), var(--shadow-sm);
+  box-shadow: inset 0 0 0 1px var(--accent-line), var(--shadow-sm);
   pointer-events: auto;
 }
 .ctx span {
